@@ -10,8 +10,8 @@ COPY . /ArcII_flask_app
 # Install needed packages
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Make port 5432 available to public
-EXPOSE 5432
+# Make port 80 available to public
+EXPOSE 80
 
 # Create variable for environment
 ENV NAME World
