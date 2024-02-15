@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-WORKDIR /app
+WORKDIR Lab 1/Lab 1.2/app
 
 COPY . /app
 
