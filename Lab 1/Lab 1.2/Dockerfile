@@ -1,21 +1,10 @@
-# Enable Dockerfile to read Python
-FROM python:3.10-slim
+FROM python:3
 
-# Allow messages to show in Knative logs
-ENV PYTHONUNBUFFERED True
+WORKDIR /usr/src/app
 
-# Set environment to container
-ENV APP_HOME /app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Set directory to flask container
-WORKDIR $APP_HOME
+COPY . .
 
-# Copy the directory contents into flask container
-COPY . ./
-
-# Install needed packages
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Run web service
-# In this case there is 1 worker with 8 different threads
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
+CMD [ "python", "./app.py" ]
